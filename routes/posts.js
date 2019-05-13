@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/postModel');
 
-
+//get all the posts
 router.get('/', async (req,res)=>{
     try {   
         const posts = await Post.find();
@@ -12,6 +12,7 @@ router.get('/', async (req,res)=>{
     }
 });
 
+//create a new post
 router.post('/', async (req,res)=>{
     const newPost = new Post({
         title: req.body.title,
@@ -25,11 +26,27 @@ router.post('/', async (req,res)=>{
         res.json({message: err})
     }
 });
-
-router.get('/specific', (req,res)=>{
-    res.send('specific post');
+//get a specific post
+router.get('/:postId', async (req,res)=>{
+    try {
+        const singlePost = await Post.findById(req.params.postId);
+        res.json(singlePost);
+    } catch(err) {
+        res.json({message: err})
+    }
+   
 });
-
+// delete a posts
+router.delete('/:postId', async (req,res)=>{
+    try {
+        const removedPost = await Post.remove({
+            _id: req.params.postId
+        });
+        res.json(removedPost);
+    }catch(err) {
+        res.json({message: err})
+    };
+});
 
 
 module.exports = router;
