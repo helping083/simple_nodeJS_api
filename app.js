@@ -1,26 +1,20 @@
 const express = require('express');
 const app = express();
-const moongose = require('mongoose');
+const mongoose = require('mongoose');
+const postsRoute = require('./routes/posts');
 const bodyParser = require('body-parser');
-require('dotenv/config');
 
 app.use(bodyParser.json());
 
-const postsRoutes = require('./routes/posts');
-
-app.use('/posts', postsRoutes);
-
-//ROUTES
+//routes
 app.get('/', (req,res)=>{
     res.send('hello world')
 });
+app.use('/postss', postsRoute);
 
 //connect to db
-moongose.connect(process.env.DB_CONNECTION,{ useNewUrlParser: true },
-    ()=> {
-        console.log('connectesss')
-    }
-);
+mongoose.connect('mongodb+srv://helping083:e2103443@cluster0-lbmkz.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true }, ()=>{
+    console.log('connected to db')
+});
 
-//server
 app.listen(3000);
