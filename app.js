@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.get('/', (req,res)=>{
     res.send('hello world')
 });
-app.use('/postss', postsRoute);
+app.use('/posts', postsRoute);
 
 //connect to db
 mongoose.connect('mongodb+srv://helping083:e2103443@cluster0-lbmkz.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true }, ()=>{
