@@ -35,4 +35,12 @@ router.get('/:postId', async (req,res)=>{
     }
 });
 
+router.delete('/:postId', async (req,res)=>{
+    try{
+        Post.remove({_id:req.params.postId});
+    }catch(err) {
+        res.json(err);
+    }
+});
+
 module.exports = router;
