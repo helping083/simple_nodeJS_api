@@ -15,7 +15,7 @@ app.get('/', (req,res)=>{
 app.use('/posts', postsRoute);
 
 //connect to db
-mongoose.connect('mongodb+srv://helping083:e2103443@cluster0-lbmkz.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true }, ()=>{
+mongoose.connect('mongodb+srv://helping083:e2103443@cluster0-8mjxj.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true }, ()=>{
     console.log('connected to db')
 });
 
